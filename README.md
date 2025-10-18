@@ -3,7 +3,9 @@
 > Modified from: [Ethan930717/BDInfoCLI-ng](https://github.com/Ethan930717/BDInfoCLI-ng/tree/kimoji-bdinfo)
 
 **Original source:** [CinemaSquid BDInfo](https://www.videohelp.com/software/BDInfo)
+
 **Forked from:** [UniqProject/BDInfo](https://github.com/UniqProject/BDInfo)
+
 **Additional sources from:** [BDInfoCLI](https://github.com/Tripplesixty/BDInfoCLI)
 
 BDInfoCLI-ng is the latest BDInfo (with UHD support) modified for CLI use. It implements an interface similar to BDInfoCLI, built on the latest BDInfo code base with minimal invasive changes for easier maintenance with future BDInfo updates.
