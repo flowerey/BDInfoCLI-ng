@@ -1,22 +1,3 @@
-//============================================================================
-// BDInfo - Blu-ray Video and Audio Analysis Tool
-// Copyright © 2010 Cinema Squid
-//
-// This library is free software; you can redistribute it and/or
-// modify it under the terms of the GNU Lesser General Public
-// License as published by the Free Software Foundation; either
-// version 2.1 of the License, or (at your option) any later version.
-//
-// This library is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// Lesser General Public License for more details.
-//
-// You should have received a copy of the GNU Lesser General Public
-// License along with this library; if not, write to the Free Software
-// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-//=============================================================================
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -103,7 +84,7 @@ namespace BDInfo
                             playlist = BDROM.PlaylistFiles[playlistFileName];
                         }
                         if (playlist != null)
-                          Clipboard.SetText(playlist.GetFilePath());
+                            Clipboard.SetText(playlist.GetFilePath());
                     }
                 }
                 if (focusedControl == listViewStreamFiles && listViewStreamFiles.SelectedItems.Count > 0)
@@ -169,7 +150,7 @@ namespace BDInfo
             try
             {
                 CommonOpenFileDialog openDialog = new CommonOpenFileDialog();
-                if (((Button) sender).Name == "buttonBrowse")
+                if (((Button)sender).Name == "buttonBrowse")
                 {
                     openDialog.IsFolderPicker = true;
                     openDialog.Title = "Select a BluRay BDMV Folder:";
@@ -609,13 +590,16 @@ namespace BDInfo
                 }
 
                 System.Console.WriteLine("Please wait while we generate the report...");
-                try                                                                                                                            {
+                try
+                {
                     FormReport report = (FormReport)FormatterServices.GetUninitializedObject(typeof(FormReport));
                     report.Generate(BDROM, selectedPlaylists, ScanResult, savePath);
                 }
                 catch (Exception ex)
-                {                                                                                                                                  System.Console.WriteLine(string.Format("{0}", (ex.Message)));
-                }                                                                                                                          }
+                {
+                    System.Console.WriteLine(string.Format("{0}", (ex.Message)));
+                }
+            }
         }
 
         /* XXX: returns -1 on 'q' input */
@@ -740,7 +724,7 @@ namespace BDInfo
 
             System.Console.WriteLine(String.Format("{0,-4}{1,-7}{2,-15}{3,-10}{4,-16}{5,-16}\n", "#", "Group", "Playlist File", "Length", "Estimated Bytes", "Measured Bytes"));
             int playlistIdx = 1;
-            Dictionary<int,TSPlaylistFile> playlistDict = new Dictionary<int, TSPlaylistFile>();
+            Dictionary<int, TSPlaylistFile> playlistDict = new Dictionary<int, TSPlaylistFile>();
 
             for (int groupIndex = 0; groupIndex < groups.Count; groupIndex++)
             {
@@ -748,7 +732,7 @@ namespace BDInfo
                 group.Sort(ComparePlaylistFiles);
 
                 foreach (TSPlaylistFile playlist in group)
-                    //in BDROM.PlaylistFiles.Values)
+                //in BDROM.PlaylistFiles.Values)
                 {
                     if (!playlist.IsValid) continue;
 
@@ -879,11 +863,13 @@ namespace BDInfo
             if (wholeDisc)
                 return;
 
-            for (int selectedIdx; (selectedIdx = getIntIndex(1, playlistIdx - 1)) > 0; ) {
+            for (int selectedIdx; (selectedIdx = getIntIndex(1, playlistIdx - 1)) > 0;)
+            {
                 selectedPlaylists.Add(playlistDict[selectedIdx]);
                 System.Console.WriteLine(String.Format("Added {0}", selectedIdx));
             }
-            if (selectedPlaylists.Count == 0) {
+            if (selectedPlaylists.Count == 0)
+            {
                 System.Console.WriteLine("No playlists selected. Exiting.");
                 System.Environment.Exit(0);
             }
@@ -1227,7 +1213,7 @@ namespace BDInfo
             ScanBDROMWorker.WorkerReportsProgress = true;
             ScanBDROMWorker.WorkerSupportsCancellation = true;
             ScanBDROMWorker.DoWork += ScanBDROMWork;
-//            ScanBDROMWorker.ProgressChanged += ScanBDROMProgress;
+            //            ScanBDROMWorker.ProgressChanged += ScanBDROMProgress;
             ScanBDROMWorker.RunWorkerCompleted += ScanBDROMCompleted;
             ScanBDROMWorker.RunWorkerAsync(streamFiles);
         }
@@ -1236,7 +1222,7 @@ namespace BDInfo
             object sender,
             DoWorkEventArgs e)
         {
-            ScanResult = new ScanBDROMResult {ScanException = new Exception("Scan is still running.")};
+            ScanResult = new ScanBDROMResult { ScanException = new Exception("Scan is still running.") };
 
             List<TSStreamFile> streamFiles = new List<TSStreamFile>();
             List<string> streamNames;
@@ -1309,7 +1295,7 @@ namespace BDInfo
 
                 timer = new System.Threading.Timer(
                     ScanBDROMProgress, scanState, 1000, 1000);
-		System.Console.WriteLine("\n{0,16}{1,-15}{2,-13}{3}","", "File", "Elapsed", "Remaining");
+                System.Console.WriteLine("\n{0,16}{1,-15}{2,-13}{3}", "", "File", "Elapsed", "Remaining");
 
                 foreach (TSStreamFile streamFile in streamFiles)
                 {
@@ -1407,7 +1393,7 @@ namespace BDInfo
                 int progressValue = (int)Math.Round(progress * 100);
                 if (progressValue < 0) progressValue = 0;
                 if (progressValue > 100) progressValue = 100;
-//                progressBarScan.Value = progressValue;
+                //                progressBarScan.Value = progressValue;
 
                 TimeSpan elapsedTime = DateTime.Now.Subtract(scanState.TimeStarted);
                 TimeSpan remainingTime;
@@ -1443,7 +1429,7 @@ namespace BDInfo
 
                 }
 
-//                UpdatePlaylistBitrates();
+                //                UpdatePlaylistBitrates();
             }
             catch { }
         }
@@ -1760,7 +1746,8 @@ namespace BDInfo
         public Dictionary<string, Exception> FileExceptions = new Dictionary<string, Exception>();
     }
 
-    public static class MessageBox {
+    public static class MessageBox
+    {
         public static DialogResult Show(string msg,
                                         string title = null,
                                         MessageBoxButtons buttons = 0,

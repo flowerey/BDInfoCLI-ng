@@ -1,22 +1,3 @@
-//============================================================================
-// BDInfo - Blu-ray Video and Audio Analysis Tool
-// Copyright © 2010 Cinema Squid
-//
-// This library is free software; you can redistribute it and/or
-// modify it under the terms of the GNU Lesser General Public
-// License as published by the Free Software Foundation; either
-// version 2.1 of the License, or (at your option) any later version.
-//
-// This library is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// Lesser General Public License for more details.
-//
-// You should have received a copy of the GNU Lesser General Public
-// License along with this library; if not, write to the Free Software
-// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-//=============================================================================
-
 #undef DEBUG
 using System.IO;
 
@@ -47,7 +28,7 @@ namespace BDInfo
             640,
         };
 
-        private static readonly byte[] AC3Channels = {2, 1, 2, 3, 3, 4, 4, 5};
+        private static readonly byte[] AC3Channels = { 2, 1, 2, 3, 3, 4, 4, 5 };
 
         public static byte AC3ChanMap(int chanMap)
         {
@@ -55,7 +36,7 @@ namespace BDInfo
 
             for (byte i = 0; i < 16; i++)
             {
-                if ((chanMap & (1<<(15-i))) != 0)
+                if ((chanMap & (1 << (15 - i))) != 0)
                     switch (i)
                     {
                         case 5:
@@ -215,8 +196,8 @@ namespace BDInfo
                         uint chanmap = buffer.ReadBits4(16);
 
                         stream.ChannelCount = stream.CoreStream.ChannelCount;
-                        stream.ChannelCount += AC3ChanMap((int) chanmap);
-                        lfeOn = (uint) stream.CoreStream.LFE;
+                        stream.ChannelCount += AC3ChanMap((int)chanmap);
+                        lfeOn = (uint)stream.CoreStream.LFE;
                     }
                 }
 
@@ -237,7 +218,7 @@ namespace BDInfo
                 if (emdfFound)
                 {
                     uint emdfContainerSize = buffer.ReadBits4(16);
-                    var remainAfterEmdf = buffer.DataBitStreamRemain() - emdfContainerSize*8;
+                    var remainAfterEmdf = buffer.DataBitStreamRemain() - emdfContainerSize * 8;
 
                     uint emdfVersion = buffer.ReadBits2(2); //emdf_version
                     if (emdfVersion == 3)
@@ -245,7 +226,7 @@ namespace BDInfo
 
                     if (emdfVersion > 0)
                     {
-                        buffer.BSSkipBits((int) (buffer.DataBitStreamRemain() - remainAfterEmdf));
+                        buffer.BSSkipBits((int)(buffer.DataBitStreamRemain() - remainAfterEmdf));
                     }
                     else
                     {
@@ -262,7 +243,7 @@ namespace BDInfo
 
                             EmdfPayloadConfig(buffer);
 
-                            int emdfPayloadSize = buffer.ReadBits2(8)*8;
+                            int emdfPayloadSize = buffer.ReadBits2(8) * 8;
                             buffer.BSSkipBits(emdfPayloadSize + 1);
                         }
 
@@ -342,15 +323,15 @@ namespace BDInfo
                     stream.BitRate += stream.CoreStream.BitRate;
             }
 
-            stream.LFE = (int) lfeOn;
+            stream.LFE = (int)lfeOn;
             if (stream.StreamType != TSStreamType.AC3_PLUS_SECONDARY_AUDIO)
             {
                 if ((stream.StreamType == TSStreamType.AC3_PLUS_AUDIO && bsid == 6) ||
                     (stream.StreamType == TSStreamType.AC3_AUDIO))
-                    stream.DialNorm = (int) dialNorm * -1;
+                    stream.DialNorm = (int)dialNorm * -1;
                 else if (stream.StreamType == TSStreamType.AC3_PLUS_AUDIO && secondFrame)
                 {
-                    stream.DialNorm = (int) dialNormExt * -1;
+                    stream.DialNorm = (int)dialNormExt * -1;
                 }
             }
             stream.IsVBR = false;

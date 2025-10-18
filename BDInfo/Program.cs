@@ -1,22 +1,3 @@
-//============================================================================
-// BDInfo - Blu-ray Video and Audio Analysis Tool
-// Copyright © 2010 Cinema Squid
-//
-// This library is free software; you can redistribute it and/or
-// modify it under the terms of the GNU Lesser General Public
-// License as published by the Free Software Foundation; either
-// version 2.1 of the License, or (at your option) any later version.
-//
-// This library is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// Lesser General Public License for more details.
-//
-// You should have received a copy of the GNU Lesser General Public
-// License along with this library; if not, write to the Free Software
-// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-//=============================================================================
-
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -92,7 +73,8 @@ namespace BDInfo
             if (list)
                 whole = true;
 
-            if (nsargs.Count == 0) {
+            if (nsargs.Count == 0)
+            {
                 show_help(option_set, "Error: insufficient args - usage is:");
                 Environment.Exit(-1);
             }
@@ -104,7 +86,8 @@ namespace BDInfo
                 Environment.Exit(-1);
             }
             string reportPath = bdPath;
-            if (nsargs.Count == 1 && !Directory.Exists(bdPath)) {
+            if (nsargs.Count == 1 && !Directory.Exists(bdPath))
+            {
                 Console.Error.WriteLine(String.Format("error: REPORT_DEST must be given if BD_PATH is an ISO.", bdPath));
                 Environment.Exit(-1);
             }
@@ -120,7 +103,8 @@ namespace BDInfo
             System.Console.WriteLine("Please wait while we scan the disc...");
             DoWorkEventArgs eventArgs = new DoWorkEventArgs(bdPath);
             main.InitBDROMWork(null, eventArgs);
-            if (mpls != null) {
+            if (mpls != null)
+            {
                 System.Console.WriteLine(mpls);
                 main.LoadPlaylists(mpls.Split(',').ToList());
             }

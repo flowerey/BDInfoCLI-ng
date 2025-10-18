@@ -1,22 +1,3 @@
-//============================================================================
-// BDInfo - Blu-ray Video and Audio Analysis Tool
-// Copyright © 2010 Cinema Squid
-//
-// This library is free software; you can redistribute it and/or
-// modify it under the terms of the GNU Lesser General Public
-// License as published by the Free Software Foundation; either
-// version 2.1 of the License, or (at your option) any later version.
-//
-// This library is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// Lesser General Public License for more details.
-//
-// You should have received a copy of the GNU Lesser General Public
-// License along with this library; if not, write to the Free Software
-// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-//=============================================================================
-
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -281,7 +262,7 @@ namespace BDInfo
                     case TSStreamType.AC3_PLUS_SECONDARY_AUDIO:
                         return "Dolby Digital Plus Audio";
                     case TSStreamType.AC3_TRUE_HD_AUDIO:
-                        if (((TSAudioStream) this).HasExtensions)
+                        if (((TSAudioStream)this).HasExtensions)
                             return "Dolby TrueHD/Atmos Audio";
                         else
                             return "Dolby TrueHD Audio";
@@ -298,7 +279,7 @@ namespace BDInfo
                     case TSStreamType.DTS_HD_SECONDARY_AUDIO:
                         return "DTS Express";
                     case TSStreamType.DTS_HD_MASTER_AUDIO:
-                        if (((TSAudioStream) this).HasExtensions)
+                        if (((TSAudioStream)this).HasExtensions)
                             return "DTS:X Master Audio";
                         else
                             return "DTS-HD Master Audio";
@@ -629,7 +610,7 @@ namespace BDInfo
                 }
                 if (StreamType == TSStreamType.HEVC_VIDEO && ExtendedData != null)
                 {
-                    var extendedData = (TSCodecHEVC.ExtendedDataSet) ExtendedData;
+                    var extendedData = (TSCodecHEVC.ExtendedDataSet)ExtendedData;
                     string extendedInfo = string.Join(" / ", extendedData.ExtendedFormatInfo);
                     description += extendedInfo;
                 }
@@ -829,7 +810,7 @@ namespace BDInfo
                             codec = "DD+ Embedded";
                             break;
                     }
-                    description += string.Format(   CultureInfo.InvariantCulture,
+                    description += string.Format(CultureInfo.InvariantCulture,
                                                     " ({0}: {1})",
                                                     codec,
                                                     CoreStream.Description);

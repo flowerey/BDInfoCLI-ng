@@ -1,22 +1,3 @@
-//============================================================================
-// BDInfo - Blu-ray Video and Audio Analysis Tool
-// Copyright © 2010 Cinema Squid
-//
-// This library is free software; you can redistribute it and/or
-// modify it under the terms of the GNU Lesser General Public
-// License as published by the Free Software Foundation; either
-// version 2.1 of the License, or (at your option) any later version.
-//
-// This library is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// Lesser General Public License for more details.
-//
-// You should have received a copy of the GNU Lesser General Public
-// License along with this library; if not, write to the Free Software
-// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-//=============================================================================
-
 using System;
 
 namespace BDInfo
@@ -46,7 +27,7 @@ namespace BDInfo
                 tag = "CORE";
                 if (stream.CoreStream == null)
                 {
-                    stream.CoreStream = new TSAudioStream {StreamType = TSStreamType.AC3_AUDIO};
+                    stream.CoreStream = new TSAudioStream { StreamType = TSStreamType.AC3_AUDIO };
                 }
                 if (!stream.CoreStream.IsInitialized)
                 {
@@ -123,16 +104,16 @@ namespace BDInfo
             buffer.BSSkipBits(49);
 
             var peakBitrate = buffer.ReadBits4(15);
-            peakBitrate = (uint) ((peakBitrate * stream.SampleRate) >> 4);
+            peakBitrate = (uint)((peakBitrate * stream.SampleRate) >> 4);
 
-            var peakBitdepth =  (double)peakBitrate / (stream.ChannelCount + stream.LFE) / stream.SampleRate;
+            var peakBitdepth = (double)peakBitrate / (stream.ChannelCount + stream.LFE) / stream.SampleRate;
 
             stream.BitDepth = peakBitdepth > 14 ? 24 : 16;
 
             buffer.BSSkipBits(79);
 
             var hasExtensions = buffer.ReadBool();
-            int numExtensions = (buffer.ReadBits2(4)*2) + 1;
+            int numExtensions = (buffer.ReadBits2(4) * 2) + 1;
             var hasContent = Convert.ToBoolean(buffer.ReadBits4(4));
 
             if (hasExtensions)
