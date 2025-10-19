@@ -1,5 +1,7 @@
 # BDInfoCLI-ng
 
+Updated fork of BDInfoCLI-ng.
+
 > Modified from: [Ethan930717/BDInfoCLI-ng](https://github.com/Ethan930717/BDInfoCLI-ng/tree/kimoji-bdinfo)
 
 **Original source:** [CinemaSquid BDInfo](https://www.videohelp.com/software/BDInfo)
